@@ -1,8 +1,11 @@
-# How to Dockerize a Celery, Falcon, RabbitMQ App
+# How to Dockerize a Celery App With Django And RabbitMQ
 
-This projects contains the source code examples accompanying the blog post: https://www.python-celery.com/2018/06/05/celery-django-docker/.
+This projects contains the source code examples accompanying the blog post:
 
-Docker is highly recommended.
+https://www.python-celery.com/2018/06/05/celery-django-docker/.
+
+
+Docker and docker-compose are highly recommended to run the example.
 
 1. Bring up the docker stack:
 ```docker-compose up -d```
