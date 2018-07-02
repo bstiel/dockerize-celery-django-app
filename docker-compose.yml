@@ -1,0 +1,40 @@
+version: '3.5'
+services:
+  app:
+    build: ./
+    image: &app app
+    restart: "no"
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    env_file: &envfile
+      - env.env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    depends_on:
+      - broker
+
+  worker:
+    image: *app
+    restart: "no"
+    env_file: *envfile
+    command: ["celery", "worker", "--app=worker.worker.app", "--concurrency=1", "--hostname=worker@%h", "--loglevel=INFO"]
+    volumes:
+      - ./app:/app
+    depends_on:
+      - broker
+    
+  flower:
+    image: zoomeranalytics/flower:0.9.1-4.0.2
+    restart: "no"
+    env_file: *envfile
+    ports:
+      - "5555:5555"
+    depends_on:
+      - broker
+
+  broker:
+    image: rabbitmq:3
+    env_file: *envfile
+    ports:
+      - 5672:5672
