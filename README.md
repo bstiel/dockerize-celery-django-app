@@ -12,10 +12,19 @@ Docker and docker-compose are highly recommended to run the example.
 
 2. Rest API is available on http://localhost:8000
 
-3. Show logs:
-```docker-compose logs```
+3. Trigger timeseries request:
+```curl -d '{"database_code":"WIKI", "dataset_code":"FB"}' -H "Content-Type: application/json" -X POST http://localhost:8000```
 
-4. Monitor tasks in flower:
+4. Check logs:
+```docker-compose logs -f```
+
+5. List cached timeseries:
+```curl -X GET http://localhost:8000```
+
+6. Get timeseries:
+```curl -X GET http://localhost:8000/WIKI-FB```
+
+6. Monitor tasks in flower:
 [http://localhost:5555](http://localhost:5555)
 
 If you run without docker, make sure you run the services
