@@ -1,7 +1,8 @@
 version: '3.5'
 services:
+
   app:
-    build: ./
+    build: .
     image: &app app
     restart: "no"
     command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
@@ -15,6 +16,7 @@ services:
       - broker
 
   worker:
+    build: .
     image: *app
     restart: "no"
     env_file: *envfile
